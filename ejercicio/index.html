@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio</title>
+    <link rel="stylesheet" href="./css/estilos.css">
+</head>
+<body>
+    <h2>Crear Producto</h2>
+    <form id="formularioCrear">
+        <input type="text" class="nombre" placeholder="Nombre Producto">
+        <input type="number" class="cantidad" placeholder="Cantidad">
+        <button type="submit">Enviar</button> 
+    </form>
+
+    <h2>Modificar Producto</h2>
+    <form id="formularioModificar">
+        <input type="text" class="productId" placeholder="ID del Producto">
+        <input type="text" class="nombre" placeholder="Nombre Producto">
+        <input type="number" class="cantidad" placeholder="Cantidad">
+        <button onclick="updateProduct()">Modificar Productos</button>
+    </form>
+
+    <h2>Eliminar Producto</h2>
+    <form id="formularioEliminar">
+        <input type="text" class="productId" placeholder="ID del Producto">
+        <button onclick="deleteProduct()">Modificar Productos</button>
+    </form>
+
+    <h2>Productos</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+            </tr>
+        </thead>
+        <tbody id="body"></tbody>
+    </table>
+
+    <script src="./js/script.js"></script>
+    
+</body>
+</html>
