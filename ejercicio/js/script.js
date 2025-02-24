@@ -1,6 +1,6 @@
-const apiUrl = 'https://crudcrud.com/api/862fbc369bb34ba2b93392303f12f9e9/products';
+const apiUrl = 'https://crudcrud.com/api/41cff483e08d4191af4d9f23b2308142/products';
 
-async function createProduct(event) {
+document.getElementById("formularioCrear").addEventListener("submit", async function createProduct(event) {
     event.preventDefault();
     const nombre = document.querySelector("#formularioCrear .nombre").value; 
     const cantidad = document.querySelector("#formularioCrear .cantidad").value;
@@ -14,15 +14,17 @@ async function createProduct(event) {
         },
         body: JSON.stringify(producto)
     });
+    console.log(producto);
+
     document.querySelector("#formularioCrear .nombre").value = "";
     document.querySelector("#formularioCrear .cantidad").value = "";
     getProducts();
     return response.json();
-}
+});
 
 async function getProducts() {
     const response = await fetch(apiUrl);
-    const datos = response.json();
+    const datos = await response.json();
 
     document.getElementById("body").innerHTML = "";
 
@@ -39,11 +41,9 @@ async function getProducts() {
         </tr>
         `;
     });
-
-    return response.json();
 }
 
-async function updateProduct(productId, product) {
+document.getElementById("formularioModificar").addEventListener("submit", async function updateProduct(productId, product) {
     const response = await fetch(`${apiUrl}/${productId}`, {
         method: 'PUT',
         headers: {
@@ -52,10 +52,12 @@ async function updateProduct(productId, product) {
         body: JSON.stringify(product)
     });
     return response.json();
-}
+});
 
-async function deleteProduct(productId) {
+document.getElementById("formularioEliminar").addEventListener("submit", async function deleteProduct(productId) {
     await fetch(`${apiUrl}/${productId}`, {
         method: 'DELETE'
     });
-}
+    getProducts();
+});
+getProducts();
