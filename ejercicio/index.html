@@ -9,22 +9,22 @@
 <body>
     <h2>Crear Producto</h2>
     <form id="formularioCrear">
-        <input type="text" class="nombre" placeholder="Nombre Producto">
-        <input type="number" class="cantidad" placeholder="Cantidad">
+        <input type="text" class="nombre" placeholder="Nombre Producto" required>
+        <input type="number" class="cantidad" placeholder="Cantidad" min="1" required>
         <button type="submit">Enviar</button> 
     </form>
 
     <h2>Modificar Producto</h2>
     <form id="formularioModificar">
-        <input type="text" class="productId" placeholder="ID del Producto">
-        <input type="text" class="nombre" placeholder="Nombre Producto">
-        <input type="number" class="cantidad" placeholder="Cantidad">
+        <input type="text" class="productId" placeholder="ID del Producto" required>
+        <input type="text" class="nombre" placeholder="Nombre Producto" required>
+        <input type="number" class="cantidad" placeholder="Cantidad" min="1" required>
         <button type="submit">Modificar Productos</button>
     </form>
 
     <h2>Eliminar Producto</h2>
     <form id="formularioEliminar">
-        <input type="text" class="productId" placeholder="ID del Producto">
+        <input type="text" class="productId" placeholder="ID del Producto" required>
         <button type="submit">Eliminar Productos</button>
     </form>
 

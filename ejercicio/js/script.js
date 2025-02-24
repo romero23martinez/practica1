@@ -5,6 +5,10 @@ document.getElementById("formularioCrear").addEventListener("submit", async func
     const nombre = document.querySelector("#formularioCrear .nombre").value; 
     const cantidad = document.querySelector("#formularioCrear .cantidad").value;
 
+    if(nombre == "" || cantidad == "" || cantidad == 0) {
+        alert("Campos vacios");
+        return;
+}
     const producto = { nombre, cantidad };
 
     const response = await fetch(apiUrl, {
@@ -36,14 +40,18 @@ async function getProducts() {
             <td>${celda.cantidad}</td>
             <td>
                 <button onclick="deleteProduct('${celda._id}')">Eliminar</button>
-                <button onclick="updateProduct('${celda._id}')">Modificar</button>
             </td>
         </tr>
         `;
     });
 }
 
-document.getElementById("formularioModificar").addEventListener("submit", async function updateProduct(productId, product) {
+document.getElementById("formularioModificar").addEventListener("submit", async function updateProduct(event) {
+    event.preventDefault();
+    const productId = document.querySelector("#formularioModificar .productId").value;
+    const nombre = document.querySelector("#formularioModificar .nombre").value;
+    const cantidad = document.querySelector("#formularioModificar .cantidad").value;
+    const product = { nombre, cantidad };
     const response = await fetch(`${apiUrl}/${productId}`, {
         method: 'PUT',
         headers: {
@@ -51,13 +59,26 @@ document.getElementById("formularioModificar").addEventListener("submit", async 
         },
         body: JSON.stringify(product)
     });
+
+    document.querySelector("#formularioModificar .productId").value = "";
+    document.querySelector("#formularioModificar .nombre").value = "";
+    document.querySelector("#formularioModificar .cantidad").value = "";
+    getProducts();
     return response.json();
+    
 });
 
-document.getElementById("formularioEliminar").addEventListener("submit", async function deleteProduct(productId) {
+async function deleteProduct(productId) {
+    
     await fetch(`${apiUrl}/${productId}`, {
         method: 'DELETE'
     });
     getProducts();
+};
+
+document.getElementById("formularioEliminar").addEventListener("submit", (event) =>{
+    event.preventDefault();
+    const productId = document.querySelector("#formularioEliminar .productId").value;
+    deleteProduct(productId);
 });
 getProducts();
